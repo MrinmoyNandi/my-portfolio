@@ -1,0 +1,43 @@
+.fluid-cursor {
+  --cur: var(--ink);
+  position: fixed; top: 0; left: 0;
+  width: 0; height: 0;
+  z-index: 2000;
+  pointer-events: none;
+  will-change: transform, opacity;
+  opacity: 0;
+  transition: opacity .3s var(--ease-out-soft);
+  display: none;
+}
+.fluid-cursor[data-visible="true"] { opacity: 1; }
+.fluid-cursor[data-interactive="true"] { --cur: var(--accent); }
+/* Over magenta fills (buttons, the route curtain) the arrow turns dark so it never disappears. */
+.fluid-cursor[data-tone="dark"] { --cur: var(--bg); }
+.fluid-cursor[data-tone="accent-2"] { --cur: var(--accent-2); }
+
+.fluid-cursor__body {
+  position: absolute; top: 0; left: 0;
+  width: calc(30 * var(--px)); height: calc(25 * var(--px));
+  transform-origin: 92%;
+  will-change: transform;
+  display: block;
+}
+.fluid-cursor__body svg { width: 100%; height: 100%; display: block; color: var(--cur); transition: color .2s linear; }
+.fluid-cursor__body svg path { fill: currentColor; stroke: var(--bg); stroke-width: 18; stroke-opacity: .55; }
+.fluid-cursor[data-interactive="true"] .fluid-cursor__body { opacity: .92; }
+.fluid-cursor[data-pressed="true"] .fluid-cursor__body { opacity: .76; }
+
+/* Hide the system cursor only when the arrow really follows the mouse (fixes the narrow-window bug). */
+@media (hover: hover) and (pointer: fine) {
+  html[data-custom-cursor="true"][data-cursor-input="pointer"],
+  html[data-custom-cursor="true"][data-cursor-input="pointer"] body,
+  html[data-custom-cursor="true"][data-cursor-input="pointer"] body * { cursor: none !important; }
+  html[data-custom-cursor="true"] .fluid-cursor { display: block; }
+}
+@media (max-width: 768px), (pointer: coarse) {
+  html[data-custom-cursor="true"] .fluid-cursor { display: block; }
+  .fluid-cursor__body { width: 26px; height: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fluid-cursor { display: none !important; }
+}

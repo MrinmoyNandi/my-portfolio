@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+.env*
+inbox/*
+!inbox/README.md
+!inbox/processed/
+inbox/processed/*
+!inbox/processed/.gitkeep

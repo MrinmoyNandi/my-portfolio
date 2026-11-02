@@ -1,0 +1,14 @@
+.lab__head { display: grid; gap: calc(16 * var(--px)); margin-bottom: calc(56 * var(--px)); }
+.lab__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(40 * var(--px)); }
+.lab__item { display: grid; gap: calc(16 * var(--px)); align-content: start; }
+.lab__item:nth-child(even) { margin-top: calc(120 * var(--px)); }
+.lab__media { aspect-ratio: 4 / 3; overflow: hidden; }
+.lab__media img, .lab__media video { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease-out-soft); }
+.lab__item:hover .lab__media img { transform: scale(1.03); }
+.lab__item p { max-width: 30em; }
+.lab__buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: calc(56 * var(--px)); }
+
+@media (max-width: 767px) {
+  .lab__grid { grid-template-columns: 1fr; }
+  .lab__item:nth-child(even) { margin-top: 0; }
+}

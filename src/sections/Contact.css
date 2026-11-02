@@ -1,0 +1,45 @@
+.contact { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding: calc(120 * var(--px)) 0; }
+.contact__bg { position: absolute; inset: 0; }
+.contact__bg img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;
+  filter: blur(40px) saturate(1.4) brightness(.75);
+  transform: scale(1.25);
+  animation: contact-drift 18s var(--ease-in-out) infinite alternate;
+}
+.contact__bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 70% at 70% 40%, transparent, var(--bg) 85%); }
+@keyframes contact-drift { to { transform: scale(1.4) translate(-3%, 2%); } }
+
+.contact__wrap { position: relative; }
+.contact__card {
+  width: min(100%, 60%);
+  min-width: min(100%, 560px);
+  background: rgba(12, 12, 12, .92);
+  border: 1.5px solid var(--surface-hr);
+  padding: calc(56 * var(--px)) calc(56 * var(--px));
+  display: grid; gap: calc(24 * var(--px));
+  backdrop-filter: blur(8px);
+}
+.contact__title { text-transform: uppercase; line-height: .95; }
+.contact__form { display: grid; grid-template-columns: 1fr 1fr; gap: calc(28 * var(--px)) calc(32 * var(--px)); }
+.field { display: grid; gap: 6px; }
+.field--wide { grid-column: 1 / -1; }
+.field .label { color: var(--muted); }
+.field input, .field textarea {
+  border-bottom: 1.5px solid rgba(242, 240, 236, .25);
+  padding: 8px 0;
+  font-size: var(--text-body-lg);
+  border-radius: 0;
+  resize: vertical;
+  transition: border-color .3s var(--ease-out-soft);
+}
+.field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--accent); }
+.field:focus-within .label { color: var(--accent-2); }
+.contact__actions { grid-column: 1 / -1; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.contact__status { color: var(--accent-2); }
+.contact__mail { justify-self: start; border-top: 1.5px solid var(--surface-hr); padding-top: calc(20 * var(--px)); width: 100%; }
+
+@media (max-width: 767px) {
+  .contact__card { width: 100%; min-width: 0; padding: 28px 20px; }
+  .contact__form { grid-template-columns: 1fr; }
+  .contact__mail { font-size: 1.1rem; word-break: break-all; }
+}
